@@ -1,10 +1,17 @@
 package utils;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 public class ExtentReportManager {
 	private static ExtentReports extent;
@@ -14,9 +21,50 @@ public class ExtentReportManager {
 		
 		if(extent==null) {
 			String timestamp = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
+			String reportPath="reports/ExtentReport_"+timestamp+".html";
+			ExtentSparkReporter reporter = new ExtentSparkReporter(reportPath);
+			reporter.config().setDocumentTitle("Automation Test Report");
+			reporter.config().setReportName("Test Execution Report");
+			extent= new ExtentReports();
+			extent.attachReporter(reporter);
+			
+			
 		}
 		
 		return extent;
 	}
-
+	public static ExtentTest createTest(String testName) {
+		test = getReportInstance().createTest(testName);
+		return test;
+		
+	}
+	public static String captureScreenshot(WebDriver driver,String screenshotName)
+	{
+		try
+		{
+			File src = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+			String folderpath = System.getProperty("user.dir") + File.separator + "screenshots";
+			File folder = new File(folderpath);
+			if(!folder.exists())
+			{
+				folder.mkdir();
+			}
+			String safeName = screenshotName.replaceAll("\\s+", "_");
+	        String path = folderpath + File.separator + safeName + ".png";
+	        
+			
+			FileUtils.copyFile(src, new File(path));
+			System.out.println("The path for screenshot is: "+path);
+			return path;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		//return screenshotname;
+		//return screenshotName;
+		
+		
+		
+	}
 }
