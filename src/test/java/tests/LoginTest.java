@@ -3,7 +3,8 @@ package tests;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.MediaEntityBuilder;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import base.BaseTest;
 import pages.LoginPage;
@@ -12,7 +13,7 @@ import utils.Log;
 
 
 public class LoginTest extends BaseTest{
-	
+	//private static final Logger log = LogManager.getLogger(LoginTest.class);
 	@Test
 	public void testLoginValid() {
 		Log.info("Starting with Login with Credentials.");

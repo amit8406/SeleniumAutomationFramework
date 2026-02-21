@@ -1,6 +1,7 @@
 package pages;
 
 import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,7 +16,7 @@ public class LoginPage {
     private By usernameTextBox = By.name("username");
     private By passwordTextBox = By.name("password");
     private By loginButton = By.xpath("//button[@type='submit']");
-    private By forgotPassLink = By.xpath("//p[@class='oxd-text oxd-text--p orangehrm-login-forgot-header']");
+    private By forgotPassLink = By.xpath("//p[@class='oxd-text oxd-text--p orangehrm-login-forgot-header']");//id attribute is not available for this element
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;

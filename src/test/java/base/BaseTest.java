@@ -7,7 +7,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
@@ -17,8 +18,10 @@ import utils.Log;
 
 
 
+
 public class BaseTest {
-	protected WebDriver driver;
+	private static final Logger log = LogManager.getLogger(BaseTest.class);
+	protected WebDriver driver;  //access within the package and subclass of the class
 	protected static ExtentReports extent;
 	protected ExtentTest test;
 	
@@ -26,7 +29,6 @@ public class BaseTest {
 	public void setupReport() {
 	
 		extent = ExtentReportManager.getReportInstance();
-		
 		
 	}
 	
